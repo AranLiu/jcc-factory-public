@@ -1,0 +1,92 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${APP_PORT:-8080}:8080"
+    environment:
+      NODE_ENV: "${NODE_ENV:-production}"
+      PORT: 8080
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS:-http://localhost:8080,http://127.0.0.1:8080}"
+      SESSION_COOKIE_SECURE: "${SESSION_COOKIE_SECURE:-false}"
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: "${MYSQL_USER:?Run npm run init:config}"
+      DB_PASSWORD: "${MYSQL_PASSWORD:?Run npm run init:config}"
+      DB_NAME: "${MYSQL_DATABASE:?Run npm run init:config}"
+      MINIO_ENDPOINT: object-storage
+      MINIO_PORT: 8333
+      MINIO_USE_SSL: "false"
+      MINIO_ACCESS_KEY: "${OBJECT_STORAGE_ACCESS_KEY:?Run npm run init:config}"
+      MINIO_SECRET_KEY: "${OBJECT_STORAGE_SECRET_KEY:?Run npm run init:config}"
+      MINIO_BUCKET: "${OBJECT_STORAGE_BUCKET:-jcc-factory}"
+      JWT_SECRET: "${JWT_SECRET:?Run npm run init:config}"
+      AUTO_PROVISION_ADMIN: "${AUTO_PROVISION_ADMIN:-false}"
+      ADMIN_USERNAME: "${ADMIN_USERNAME:-}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-}"
+      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
+      GEMINI_DEFAULT_MODEL: "${GEMINI_DEFAULT_MODEL:-}"
+      AI_PROVIDER_TIMEOUT_MS: "${AI_PROVIDER_TIMEOUT_MS:-180000}"
+    volumes:
+      - documents_data:/app/server/uploads/documents
+    depends_on:
+      mysql:
+        condition: service_healthy
+      object-storage:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/api/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  mysql:
+    build:
+      context: .
+      dockerfile: docker/mysql/Dockerfile
+    command: ["--pid-file=/run/jcc-mysql/mysqld.pid"]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${MYSQL_PORT:-3306}:3306"
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE:?Run npm run init:config}"
+      MYSQL_USER: "${MYSQL_USER:?Run npm run init:config}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:?Run npm run init:config}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:?Run npm run init:config}"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./server/database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u root -p\"$${MYSQL_ROOT_PASSWORD}\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
+  object-storage:
+    image: chrislusf/seaweedfs:4.41
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "127.0.0.1:${OBJECT_STORAGE_PORT:-8333}:8333"
+    environment:
+      AWS_ACCESS_KEY_ID: "${OBJECT_STORAGE_ACCESS_KEY:?Run npm run init:config}"
+      AWS_SECRET_ACCESS_KEY: "${OBJECT_STORAGE_SECRET_KEY:?Run npm run init:config}"
+      S3_BUCKET: "${OBJECT_STORAGE_BUCKET:-jcc-factory}"
+    volumes:
+      - object_storage_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9333/cluster/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+volumes:
+  mysql_data:
+  object_storage_data:
+  documents_data:

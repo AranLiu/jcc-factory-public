@@ -1,0 +1,302 @@
+/* 全局样式重置和基础设置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 工具类 */
+.full-height {
+  height: 100vh;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 页面布局 */
+.login-container {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90vw;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logo-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #262626;
+  margin-bottom: 8px;
+}
+
+.logo-subtitle {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+/* 主页样式 */
+.homepage-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage-content {
+  background: white;
+  border-radius: 16px;
+  padding: 60px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 500px;
+}
+
+.homepage-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #262626;
+  margin-bottom: 40px;
+}
+
+.feature-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.feature-button {
+  height: 60px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 12px;
+  min-width: 160px;
+}
+
+/* 工作台样式 */
+.workspace-layout {
+  min-height: 100vh;
+}
+
+.workspace-header {
+  background: white;
+  padding: 0 24px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workspace-content {
+  padding: 24px;
+}
+
+.project-card {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* 上传区域样式 */
+.upload-area {
+  border: 2px dashed #d9d9d9;
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+  background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+  border-color: #1890ff;
+  background: #f0f8ff;
+}
+
+.upload-area.dragover {
+  border-color: #1890ff;
+  background: #e6f7ff;
+}
+
+/* 文件列表样式 */
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.file-item:hover {
+  border-color: #1890ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 视频播放器样式 */
+.video-player {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* AI配置面板样式 */
+.ai-config-panel {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.config-item {
+  margin-bottom: 16px;
+}
+
+.config-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #262626;
+}
+
+/* 结果展示样式 */
+.result-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #f0f0f0;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.result-content {
+  line-height: 1.8;
+  color: #262626;
+  white-space: pre-wrap;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .homepage-content {
+    min-width: auto;
+    width: 90vw;
+    padding: 40px 20px;
+  }
+  
+  .feature-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .workspace-content {
+    padding: 16px;
+  }
+  
+  .login-form {
+    width: 90vw;
+    padding: 30px 20px;
+  }
+}
+
+/* 单元剧本工作台标签页滚动样式 */
+.simple-tabs .ant-tabs-nav {
+  margin: 0;
+}
+
+.simple-tabs .ant-tabs-nav-wrap {
+  overflow: hidden;
+}
+
+.simple-tabs .ant-tabs-nav-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 和 Edge */
+}
+
+.simple-tabs .ant-tabs-nav-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari 和 Opera */
+}
+
+.simple-tabs .ant-tabs-tab {
+  flex-shrink: 0;
+  min-width: 120px;
+  max-width: 200px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  margin-right: 4px;
+  padding: 4px 8px;
+}
+
+.simple-tabs .ant-tabs-tab-btn {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 

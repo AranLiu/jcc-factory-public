@@ -1,0 +1,56 @@
+{
+  "name": "jcc-factory",
+  "version": "2.1.0",
+  "description": "自托管的短剧拆解与剧本工作台",
+  "private": true,
+  "author": "JCC Factory Team",
+  "license": "MIT",
+  "keywords": [
+    "ai",
+    "video-analysis",
+    "script",
+    "short-drama",
+    "gemini"
+  ],
+  "engines": {
+    "node": ">=22.15.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "install:all": "npm ci && npm ci --prefix server && npm ci --prefix client",
+    "setup:admin": "node scripts/setup-admin.js",
+    "init:config": "node scripts/init-config.js",
+    "compose": "node scripts/compose.js",
+    "quickstart": "npm run init:config && npm run compose -- up --build -d --wait",
+    "docker:up": "npm run compose -- up -d --wait",
+    "docker:down": "npm run compose -- down",
+    "docker:logs": "npm run compose -- logs -f",
+    "docker:reset": "npm run compose -- down -v",
+    "create:user": "node scripts/create-user.js",
+    "migrate": "npm --prefix server run migrate",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "verify": "npm test && npm run build",
+    "audit:all": "npm audit --audit-level=high && npm audit --prefix server --audit-level=high && npm audit --prefix client --audit-level=high"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "mysql2": "^3.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AranLiu/jcc-factory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AranLiu/jcc-factory/issues"
+  },
+  "homepage": "https://github.com/AranLiu/jcc-factory#readme"
+}
