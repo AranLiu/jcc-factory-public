@@ -1,0 +1,383 @@
+/* General Layout & Sider */
+.workspace-layout .ant-layout-header {
+  /* ... existing styles if any ... */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workspace-layout .ant-layout-content {
+  background: #f0f2f5;
+}
+
+.control-panel-wrapper {
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  height: 100%;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+
+.panel-section {
+  margin-bottom: 24px;
+}
+
+.panel-section .ant-form-item-label {
+  font-weight: 500;
+}
+
+/* Overriding Ant Design's Upload Dragger component */
+.upload-dragger.ant-upload.ant-upload-drag {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+.upload-dragger.ant-upload.ant-upload-drag:hover {
+  border-color: #40a9ff;
+}
+.upload-dragger.ant-upload.ant-upload-drag .ant-upload-drag-icon .anticon {
+  font-size: 32px;
+  color: #40a9ff;
+}
+.upload-dragger.ant-upload.ant-upload-drag .ant-upload-text {
+  font-size: 16px;
+  color: #595959;
+}
+.upload-dragger.ant-upload.ant-upload-drag .ant-upload-hint {
+  color: #8c8c8c;
+}
+
+.video-processing-container {
+  display: flex;
+  flex-direction: column;
+  height: 109vh; /* Match left side height exactly */
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.video-list-header {
+  padding: 16px;
+  /* border-bottom: 1px solid #f0f0f0; */
+  flex-shrink: 0; /* Prevent header from shrinking */
+  background: #fff;
+  z-index: 10;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.video-list-content {
+  flex-grow: 1; /* Allow content to take up available space */
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.video-list-footer {
+  padding: 16px;
+  /* border-top: 1px solid #f0f0f0; */
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent footer from shrinking */
+  background: #fff;
+  z-index: 10;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* 右侧主内容区 */
+.video-processing-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.video-list-container {
+  flex-grow: 1;
+}
+
+/* 视频卡片包裹器，用于放置卡片和箭头 */
+.video-card-wrapper {
+  position: relative;
+  padding-bottom: 30px; /* 为箭头留出空间 */
+}
+
+/* 最后一个卡片不需要下方的箭头和间距 */
+.video-card-wrapper:last-child {
+  padding-bottom: 0;
+}
+.video-card-wrapper:last-child .arrow-connector {
+  display: none;
+}
+
+/* 箭头连接器 */
+.arrow-connector {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d9d9d9;
+  font-size: 20px;
+}
+
+/* 视频信息卡片 */
+.video-card {
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+}
+
+.video-card-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.video-thumbnail {
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  background: #f0f2f5;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: #bfbfbf;
+}
+
+.analysis-result {
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 6px;
+  height: 120px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+  color: #595959;
+  white-space: pre-wrap; /* 保持换行符 */
+  border: 1px solid #f0f0f0;
+}
+
+/* 底部操作栏 */
+.content-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+}
+
+.video-card-wrapper-list {
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 16px;
+  transition: box-shadow 0.3s;
+}
+
+.video-card-wrapper-list:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.video-thumbnail-list {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f0f2f5;
+  height: 150px; /* 保持高度不变 */
+  width: 120px;   /* 设置固定宽度，创建更窄的竖屏比例 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto; /* 居中显示 */
+}
+
+.video-thumbnail-list img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.thumbnail-placeholder-list {
+  font-size: 48px;
+  color: #ccc;
+}
+
+.thumbnail-overlay-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.video-thumbnail-list:hover .thumbnail-overlay-list {
+  opacity: 1;
+}
+
+.video-meta-list {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.video-details-list {
+  display: flex;
+  flex-direction: column;
+  height: 200px; /* Fixed total height */
+  min-height: 200px;
+}
+
+.video-header-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  height: 32px; /* Fixed header height */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.analysis-result-wrapper {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: #fafafa;
+  height: 120px; /* Fixed content height */
+  flex-shrink: 0; /* Prevent shrinking */
+  display: flex;
+  flex-direction: column;
+}
+
+.analysis-result-list {
+  color: #595959;
+  height: 100%;
+}
+
+.edit-result-btn {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(2px);
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-actions-list {
+  height: 40px; /* Fixed actions height */
+  flex-shrink: 0; /* Prevent shrinking */
+  display: flex;
+  align-items: center;
+}
+
+/* 只调整视频卡片内操作按钮的图标大小 */
+.video-actions-list .ant-btn .anticon {
+  font-size: 15px; /* 同样，在这里调整数值 */
+}
+
+/* 设置视频卡片内按钮的默认边框 */
+.video-actions-list .ant-btn {
+  border-width: 1px; /* 调整边框粗细 */
+  border-color: #40a9ff; /* 调整边框颜色 */
+  border-style: solid; /* 确保边框是实线 */
+  width: 30px;  /* 设置固定的宽度 */
+  height: 30px; /* 设置固定的高度 */
+}
+
+/* 鼠标悬停时按钮的边框颜色（可选） */
+.video-actions-list .ant-btn:hover {
+  border-color: #096dd9; /* 悬停时更深的蓝色 */
+}
+
+/* 特别设置"删除"按钮的边框颜色 */
+.video-actions-list .ant-btn.ant-btn-dangerous {
+    border-color: #ffffff; /* 红色 */
+}
+
+.video-actions-list .ant-btn.ant-btn-dangerous:hover {
+    border-color: #cf1322; /* 悬停时更深的红色 */
+}
+
+/* 修改视频卡片内"解析"图标的颜色 */
+.video-actions-list .anticon-robot {
+  color: #1677ff; /* 在这里修改为您想要的颜色，例如 'green', '#52c41a' 等 */
+}
+
+/* 鼠标悬停在按钮上时，图标的颜色（可选） */
+.video-actions-list .ant-btn:hover .anticon-robot {
+  color: #40a9ff; /* 例如，悬停时变为浅蓝色 */
+}
+
+/* --- New Styles for Icon Buttons --- */
+
+/* Set default state for buttons in video card */
+.video-actions-list .ant-btn {
+  padding: 8px 12px; /* Increased space between icon and border */
+  background-color: transparent; /* Transparent background by default */
+  border-color: transparent; /* Invisible border by default */
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Set default color for icons and add transition */
+.video-actions-list .ant-btn .anticon {
+  color: #8c8c8c; /* Neutral gray icon color */
+  transition: color 0.3s;
+}
+
+/* --- Hover States --- */
+
+/* Hover state for the "Analyze" button */
+.video-actions-list .ant-btn:not(.ant-btn-dangerous):hover {
+  background-color: #1677ff; /* Blue background on hover */
+  border-color: #1677ff; /* Blue border on hover */
+}
+
+/* Hover state for the "Delete" button */
+.video-actions-list .ant-btn.ant-btn-dangerous:hover {
+  background-color: #ff4d4f; /* Red background on hover */
+  border-color: #ff4d4f;
+}
+
+/* On ANY button hover, make the icon inside white */
+.video-actions-list .ant-btn:hover .anticon {
+  color: #ffffff; /* White icon on hover */
+} 
+
+/* 解析结果面板样式 */
+.analysis-result-panel {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background: #fff;
+  min-height: 500px;
+}
+
+.integration-result-panel {
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  background: #fff;
+  min-height: 300px;
+}
+
+/* 缩小右侧筛选框（Select）内文字与高度，使其与排序按钮字号一致 */
+.tiny-select .ant-select-selector {
+  height: 24px !important;
+  padding: 0 8px !important;
+}
+.tiny-select .ant-select-selection-item,
+.tiny-select .ant-select-selection-placeholder {
+  font-size: 11px !important;
+  line-height: 22px !important;
+}
+.tiny-select .ant-select-arrow {
+  font-size: 10px;
+}

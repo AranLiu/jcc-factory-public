@@ -1,0 +1,81 @@
+CREATE TABLE IF NOT EXISTS characters (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  project_id INT NOT NULL,
+  public_id VARCHAR(64) NOT NULL,
+  canonical_name VARCHAR(120) NOT NULL,
+  normalized_name VARCHAR(120) NOT NULL,
+  status ENUM('resolved', 'provisional', 'unresolved') NOT NULL DEFAULT 'unresolved',
+  role_description VARCHAR(500) NULL,
+  visual_description VARCHAR(500) NULL,
+  confidence DECIMAL(5,4) NOT NULL DEFAULT 0,
+  first_seen_episode INT NULL,
+  last_seen_episode INT NULL,
+  created_from_file_id INT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_characters_project_public (project_id, public_id),
+  KEY idx_characters_project_name (project_id, normalized_name),
+  KEY idx_characters_project_status (project_id, status),
+  CONSTRAINT fk_characters_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+  CONSTRAINT fk_characters_created_file FOREIGN KEY (created_from_file_id) REFERENCES files(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS character_aliases (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  character_id BIGINT UNSIGNED NOT NULL,
+  alias VARCHAR(120) NOT NULL,
+  normalized_alias VARCHAR(120) NOT NULL,
+  first_seen_episode INT NULL,
+  last_seen_episode INT NULL,
+  confidence DECIMAL(5,4) NOT NULL DEFAULT 0,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_character_aliases_character_label (character_id, normalized_alias),
+  KEY idx_character_aliases_label (normalized_alias),
+  CONSTRAINT fk_character_aliases_character FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS character_appearances (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  character_id BIGINT UNSIGNED NOT NULL,
+  project_id INT NOT NULL,
+  file_id INT NOT NULL,
+  episode_number INT NULL,
+  local_id VARCHAR(80) NOT NULL,
+  display_label VARCHAR(120) NOT NULL,
+  confidence DECIMAL(5,4) NOT NULL DEFAULT 0,
+  visual_description VARCHAR(500) NULL,
+  role_description VARCHAR(500) NULL,
+  evidence_json JSON NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_character_appearances_file_local (file_id, local_id),
+  KEY idx_character_appearances_project_episode (project_id, episode_number),
+  KEY idx_character_appearances_character_episode (character_id, episode_number),
+  CONSTRAINT fk_character_appearances_character FOREIGN KEY (character_id) REFERENCES characters(id) ON DELETE CASCADE,
+  CONSTRAINT fk_character_appearances_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+  CONSTRAINT fk_character_appearances_file FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS character_relationships (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  project_id INT NOT NULL,
+  source_character_id BIGINT UNSIGNED NOT NULL,
+  target_character_id BIGINT UNSIGNED NOT NULL,
+  relationship_type VARCHAR(120) NOT NULL,
+  confidence DECIMAL(5,4) NOT NULL DEFAULT 0,
+  evidence VARCHAR(500) NULL,
+  evidence_file_id INT NOT NULL,
+  first_episode INT NULL,
+  last_episode INT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_character_relationship_evidence (evidence_file_id, source_character_id, target_character_id, relationship_type),
+  KEY idx_character_relationships_project (project_id),
+  KEY idx_character_relationships_source (source_character_id),
+  KEY idx_character_relationships_target (target_character_id),
+  CONSTRAINT fk_character_relationships_project FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE,
+  CONSTRAINT fk_character_relationships_source FOREIGN KEY (source_character_id) REFERENCES characters(id) ON DELETE CASCADE,
+  CONSTRAINT fk_character_relationships_target FOREIGN KEY (target_character_id) REFERENCES characters(id) ON DELETE CASCADE,
+  CONSTRAINT fk_character_relationships_evidence_file FOREIGN KEY (evidence_file_id) REFERENCES files(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -1,0 +1,37 @@
+{
+  "name": "jcc-factory-server",
+  "version": "2.1.0",
+  "description": "JCC Factory 短剧拆解后端服务",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "node --test test/**/*.test.js",
+    "migrate": "node database/runMigrations.js"
+  },
+  "dependencies": {
+    "@ffprobe-installer/ffprobe": "^2.1.2",
+    "axios": "^1.18.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "docx": "^9.5.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.22.2",
+    "express-rate-limit": "^7.1.5",
+    "form-data": "^4.0.6",
+    "helmet": "^7.1.0",
+    "http-proxy-middleware": "^4.2.0",
+    "https-proxy-agent": "^7.0.6",
+    "jsonwebtoken": "^9.0.3",
+    "mammoth": "^1.11.0",
+    "minio": "^8.0.7",
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.1",
+    "node-fetch": "^3.3.2",
+    "sanitize-html": "^2.17.6",
+    "uuid": "^11.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

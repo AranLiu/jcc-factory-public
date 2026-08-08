@@ -1,0 +1,446 @@
+/* 视频操作组件样式文件 */
+
+/* ========== 主操作栏样式 ========== */
+.video-operations-header {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.video-operations-header:hover {
+  border-color: #d9d9d9;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.video-operations-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 主要控制区域 */
+.primary-controls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.select-all-group .select-all-btn {
+  height: 28px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.select-all-group .select-all-btn.selected {
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+  border-color: #1890ff;
+  box-shadow: 0 2px 4px 0 rgba(24, 144, 255, 0.2);
+}
+
+/* 筛选组样式 */
+.filter-group {
+  padding: 4px 12px;
+  background: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+}
+
+.filter-select {
+  min-width: 90px;
+  font-size: 12px;
+}
+
+.filter-select .ant-select-selector {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  height: 24px !important;
+  padding: 0 4px !important;
+}
+
+.filter-select .ant-select-selection-item {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 排序组样式 */
+.sort-group .sort-btn {
+  height: 28px;
+  border-radius: 6px;
+  background: #ffffff;
+  border-color: #d9d9d9;
+  color: #595959;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.sort-group .sort-btn:hover {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+/* 统计区域样式 */
+.statistics-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+
+.statistics-btn {
+  padding: 0 8px;
+  height: auto;
+  border: none;
+  background: transparent;
+  color: #666;
+}
+
+.statistics-btn:hover {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+
+.stat-text {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #999;
+}
+
+.stat-separator {
+  font-size: 12px;
+  color: #d9d9d9;
+  margin: 0 8px;
+}
+
+/* 高级控制区域 */
+.advanced-controls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.more-actions-btn {
+  height: 28px;
+  border-radius: 6px;
+  color: #666;
+  border-color: #d9d9d9;
+  transition: all 0.2s ease;
+}
+
+.more-actions-btn:hover {
+  color: #1890ff;
+  border-color: #1890ff;
+}
+
+/* ========== 批量操作栏样式 ========== */
+.batch-operations-bar {
+  background: linear-gradient(135deg, #e6f7ff 0%, #f0f9ff 100%);
+  border: 1px solid #91d5ff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.batch-operations-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 选择信息区域 */
+.selection-info {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.selection-tag {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  border: none;
+  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
+}
+
+.clear-selection-btn {
+  color: #8c8c8c;
+  transition: all 0.2s ease;
+}
+
+.clear-selection-btn:hover {
+  color: #ff4d4f;
+  background: rgba(255, 77, 79, 0.1);
+}
+
+/* 批量操作区域 */
+.batch-actions {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.action-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+}
+
+.group-label {
+  font-size: 11px;
+  color: #666;
+  line-height: 1;
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.action-divider {
+  height: 40px;
+  margin: 0 16px;
+  border-color: #e8e8e8;
+  opacity: 0.8;
+}
+
+/* 统一按钮样式 */
+.batch-operations-bar .ant-btn {
+  border-radius: 6px;
+  font-size: 13px;
+  height: 32px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+/* 解析按钮 */
+.analysis-btn {
+  color: #1890ff;
+  border-color: #1890ff;
+  background: #fff;
+}
+
+.analysis-btn:hover {
+  background: #e6f7ff;
+  border-color: #1890ff;
+  color: #1890ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(24, 144, 255, 0.2);
+}
+
+/* 后台解析按钮 */
+.queue-btn {
+  color: #fa8c16;
+  border-color: #fa8c16;
+  background: #fff;
+}
+
+.queue-btn:hover {
+  background: #fff7e6;
+  border-color: #fa8c16;
+  color: #fa8c16;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(250, 140, 22, 0.2);
+}
+
+/* 角色图谱按钮 */
+.character-graph-btn {
+  color: #52c41a;
+  border-color: #52c41a;
+  background: #fff;
+}
+
+.character-graph-btn:hover {
+  background: #f6ffed;
+  border-color: #52c41a;
+  color: #52c41a;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(82, 196, 26, 0.2);
+}
+
+/* 拼接剧本按钮 */
+.concatenate-btn {
+  color: #722ed1;
+  border-color: #722ed1;
+  background: #fff;
+}
+
+.concatenate-btn:hover {
+  background: #f9f0ff;
+  border-color: #722ed1;
+  color: #722ed1;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(114, 46, 209, 0.2);
+}
+
+/* 下载按钮 */
+.download-btn {
+  color: #13c2c2;
+  border-color: #13c2c2;
+  background: #fff;
+}
+
+.download-btn:hover {
+  background: #e6fffb;
+  border-color: #13c2c2;
+  color: #13c2c2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(19, 194, 194, 0.2);
+}
+
+/* 删除按钮 */
+.delete-btn {
+  background: #fff;
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+}
+
+.delete-btn:hover {
+  background: #fff2f0;
+  border-color: #ff4d4f;
+  color: #ff4d4f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px 0 rgba(255, 77, 79, 0.2);
+}
+
+/* 禁用状态 */
+.batch-operations-bar .ant-btn:disabled {
+  transform: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.batch-operations-bar .ant-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ========== 响应式适配 ========== */
+@media (max-width: 1200px) {
+  .video-operations-header-content {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .statistics-area {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+  }
+}
+
+@media (max-width: 768px) {
+  .batch-operations-content {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .batch-actions {
+    justify-content: center;
+  }
+  
+  .action-group {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .group-label {
+    margin-right: 8px;
+  }
+  
+  .action-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .video-operations-header {
+    padding: 8px 12px;
+  }
+  
+  .primary-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .filter-group {
+    padding: 2px 8px;
+  }
+  
+  .batch-operations-bar {
+    padding: 8px 12px;
+  }
+  
+  .batch-actions .ant-space {
+    flex-wrap: wrap;
+  }
+}
+
+/* ========== 暗色主题适配 ========== */
+@media (prefers-color-scheme: dark) {
+  .video-operations-header {
+    background: #141414;
+    border-color: #303030;
+  }
+  
+  .filter-group {
+    background: #1f1f1f;
+    border-color: #303030;
+  }
+  
+  .batch-operations-bar {
+    background: linear-gradient(135deg, #0f1419 0%, #111a2c 100%);
+    border-color: #177ddc;
+  }
+  
+  .statistics-btn:hover {
+    background: #262626;
+  }
+}
+
+/* ========== 辅助动画 ========== */
+.ant-btn {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ant-select {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ant-badge {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
