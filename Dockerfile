@@ -1,11 +1,11 @@
-FROM node:22.16.0-bookworm-slim AS client-build
+FROM node:26.8-bookworm-slim AS client-build
 WORKDIR /app
 COPY client/package.json client/package-lock.json ./client/
 RUN npm ci --prefix client
 COPY client ./client
 RUN npm --prefix client run build
 
-FROM node:22.16.0-bookworm-slim AS server-deps
+FROM node:26.8-bookworm-slim AS server-deps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY server/package.json server/package-lock.json ./server/
@@ -16,7 +16,7 @@ COPY server/python_services/requirements.txt /tmp/requirements.txt
 RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-cache-dir -r /tmp/requirements.txt
 
-FROM node:22.16.0-bookworm-slim AS node-runtime
+FROM node:26.8-bookworm-slim AS node-runtime
 
 FROM python:3.12-slim-bookworm AS runtime
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg curl ca-certificates \
