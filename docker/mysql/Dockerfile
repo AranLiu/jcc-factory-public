@@ -1,4 +1,4 @@
-FROM mysql:8.4.10
+FROM mysql:26.10.0
 
 # The Compose service uses a named volume whose mount point is already owned by
 # mysql. mysqlsh and gosu are therefore unnecessary runtime administration tools.
