@@ -11,14 +11,14 @@ COPY package.json package-lock.json ./
 COPY server/package.json server/package-lock.json ./server/
 RUN npm ci --omit=dev && npm ci --omit=dev --prefix server
 
-FROM python:3.12-slim-bookworm AS python-deps
+FROM python:3.15-slim-bookworm AS python-deps
 COPY server/python_services/requirements.txt /tmp/requirements.txt
 RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-cache-dir -r /tmp/requirements.txt
 
 FROM node:22.16.0-bookworm-slim AS node-runtime
 
-FROM python:3.12-slim-bookworm AS runtime
+FROM python:3.15-slim-bookworm AS runtime
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg curl ca-certificates \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --system app \
